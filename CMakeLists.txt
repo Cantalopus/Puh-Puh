@@ -13,7 +13,11 @@ set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(fmt CONFIG REQUIRED)
-find_package(SFML 2.6 COMPONENTS graphics window system CONFIG REQUIRED)
+find_package(SFML 3 CONFIG REQUIRED COMPONENTS
+    Graphics
+    Window
+    System
+)
 
 #We're using the project name as the target name, but you can change it to make them different.
 #With this setup, the name of the executable will be the same as the project name.
@@ -31,7 +35,7 @@ target_sources(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE 
         fmt::fmt
-        sfml-graphics
-        sfml-window
-        sfml-system
+        SFML::Graphics
+        SFML::Window
+        SFML::System
 )
