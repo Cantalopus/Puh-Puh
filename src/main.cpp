@@ -23,33 +23,66 @@ int main()
 
     constexpr float paddle_speed{500.0f};
 
-    //main loop
+////////////////////////////MAIN LOOP////////////////////////////////////////////////
     while(window.isOpen())
     {
         const float delta_time = clock.restart().asSeconds();
 
+///////////LEFT PADDLE CONTROLS
         float left_movement{};
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
         {
             left_movement -= paddle_speed * delta_time;
         }
+        if (left_paddle.getPosition().y < 0.0f)
+        {
+            left_paddle.setPosition({
+                left_paddle.getPosition().x,
+                0.0f
+            });
+        }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
         {
             left_movement += paddle_speed * delta_time;
         }
+        if (left_paddle.getPosition().y > 480.0f)
+        {
+            left_paddle.setPosition({
+                left_paddle.getPosition().x,
+                480.0f
+            });
+        }
         left_paddle.move({0.0f, left_movement});
 
+        
+
+///////////RIGHT PADDLE CONTROLS
         float right_movement{};
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
         {
             right_movement -= paddle_speed * delta_time;
         }
+        if (right_paddle.getPosition().y < 0.0f)
+        {
+            right_paddle.setPosition({
+                right_paddle.getPosition().x,
+                0.0f
+            });
+        }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
         {
             right_movement += paddle_speed * delta_time;
         }
+        if (right_paddle.getPosition().y > 480.0f)
+        {
+            right_paddle.setPosition({
+                right_paddle.getPosition().x,
+                480.0f
+            });
+        }
         right_paddle.move({0.0f, right_movement});
 
+////////////CLOSE WINDOW
         while (const auto event = window.pollEvent())
         {
             if(event->is<sf::Event::Closed>())
