@@ -7,7 +7,7 @@ int main()
         "pong"
     };
 
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(120);
 
     sf::RectangleShape left_paddle{{20.0f, 120.0f}};
     left_paddle.setPosition({50.0f, 240.0f});
