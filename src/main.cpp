@@ -34,16 +34,20 @@ int main()
         {
             left_movement -= paddle_speed * delta_time;
         }
+        
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+        {
+            left_movement += paddle_speed * delta_time;
+        }
+
+        left_paddle.move({0.0f, left_movement});
+
         if (left_paddle.getPosition().y < 0.0f)
         {
             left_paddle.setPosition({
                 left_paddle.getPosition().x,
                 0.0f
             });
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-        {
-            left_movement += paddle_speed * delta_time;
         }
         if (left_paddle.getPosition().y > 480.0f)
         {
@@ -52,7 +56,7 @@ int main()
                 480.0f
             });
         }
-        left_paddle.move({0.0f, left_movement});
+        
 
         
 
@@ -62,16 +66,20 @@ int main()
         {
             right_movement -= paddle_speed * delta_time;
         }
+        
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+        {
+            right_movement += paddle_speed * delta_time;
+        }
+
+        right_paddle.move({0.0f, right_movement});
+
         if (right_paddle.getPosition().y < 0.0f)
         {
             right_paddle.setPosition({
                 right_paddle.getPosition().x,
                 0.0f
             });
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
-        {
-            right_movement += paddle_speed * delta_time;
         }
         if (right_paddle.getPosition().y > 480.0f)
         {
@@ -80,7 +88,7 @@ int main()
                 480.0f
             });
         }
-        right_paddle.move({0.0f, right_movement});
+        
 
 ////////////CLOSE WINDOW
         while (const auto event = window.pollEvent())
