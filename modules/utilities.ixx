@@ -1,16 +1,22 @@
 module;
 
+#include <SFML/Window/VideoMode.hpp>
 #include <fmt/format.h>
 #include <SFML/Graphics.hpp>
 
 export module utilities; // Name doesn't have to match the .ixx file
 
 export void puh_puh(){
+
     sf::RenderWindow window{
         sf::VideoMode{{1000, 600}},
         "pong"
     };
 
+    const sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+    const sf::Vector2u window_size = window.getSize();
+
+    window.setPosition({100, 100});
     window.setFramerateLimit(120);
 
     sf::RectangleShape left_paddle{{20.0f, 120.0f}};
@@ -26,6 +32,10 @@ export void puh_puh(){
     sf::Clock clock;
 
     constexpr float paddle_speed{500.0f};
+
+    float ball_velocity_x{350.0f};
+    float ball_velocity_y{250.0f};
+    constexpr float ball_radius{12.0f};
 
 ////////////////////////////MAIN LOOP////////////////////////////////////////////////
     while(window.isOpen())
@@ -93,7 +103,28 @@ export void puh_puh(){
             });
         }
         
+////////////BALL MOVEMENT
 
+        ball.move({
+            ball_velocity_x * delta_time,
+            ball_velocity_y * delta_time
+        }); 
+
+        if (ball.getPosition().y - ball_radius < 0.0f)
+            ball_velocity_y = -ball_velocity_y;
+        if (ball.getPosition().y + ball_radius > 600.0f)
+            ball_velocity_y = -ball_velocity_y;
+
+        if (ball.getPosition().y > right_paddle.getPosition().y 
+            && ball.getPosition().y < right_paddle.getPosition().y + 120.0f 
+                && ball.getPosition().x >= right_paddle.getPosition().x){
+            ball_velocity_x = -ball_velocity_x;
+        }
+        if (ball.getPosition().y > left_paddle.getPosition().y 
+            && ball.getPosition().y < left_paddle.getPosition().y + 120.0f 
+                && ball.getPosition().x <= left_paddle.getPosition().x + left_paddle.getSize().x){
+            ball_velocity_x = -ball_velocity_x;
+        }
 ////////////CLOSE WINDOW
         while (const auto event = window.pollEvent())
         {

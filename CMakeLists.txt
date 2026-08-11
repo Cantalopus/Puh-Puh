@@ -27,13 +27,24 @@ find_package(
 
 message(STATUS "SFML version: ${SFML_VERSION}")
 message(STATUS "SFML directory: ${SFML_DIR}")
+message([[multiline
+    bracket
+    separate_arguments
+]])
+message([==[
+    because we used two equal-signs "=="
+    this command recieves only a single separate_arguments
+    even if it includes two square brackets in a row
+    { "petsArray" = [["mouse", "cat"],["dog"]] }
+    ]==]
+)
 
 add_executable(${PROJECT_NAME})
 
         target_sources(${PROJECT_NAME}
                 PRIVATE
                     src/main.cpp
-                    
+
                 PUBLIC
                 FILE_SET CXX_MODULES 
                 FILES
