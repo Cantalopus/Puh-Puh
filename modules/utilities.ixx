@@ -114,7 +114,7 @@ export void puh_puh(){
             ball_velocity_y = -ball_velocity_y;
         if (ball.getPosition().y + ball_radius > 600.0f)
             ball_velocity_y = -ball_velocity_y;
-
+/*
         if (ball.getPosition().y > right_paddle.getPosition().y 
             && ball.getPosition().y < right_paddle.getPosition().y + 120.0f 
                 && ball.getPosition().x >= right_paddle.getPosition().x){
@@ -125,6 +125,32 @@ export void puh_puh(){
                 && ball.getPosition().x <= left_paddle.getPosition().x + left_paddle.getSize().x){
             ball_velocity_x = -ball_velocity_x;
         }
+*/        
+
+        // Right paddle
+        if (ball_velocity_x > 0.0f
+            && ball.getPosition().x + ball_radius >= right_paddle.getPosition().x
+            && ball.getPosition().x - ball_radius
+                <= right_paddle.getPosition().x + right_paddle.getSize().x
+            && ball.getPosition().y + ball_radius >= right_paddle.getPosition().y
+            && ball.getPosition().y - ball_radius
+                <= right_paddle.getPosition().y + right_paddle.getSize().y)
+        {
+            ball_velocity_x = -ball_velocity_x;
+        }
+        
+        // Left paddle
+        if (ball_velocity_x < 0.0f
+            && ball.getPosition().x - ball_radius
+                <= left_paddle.getPosition().x + left_paddle.getSize().x
+            && ball.getPosition().x + ball_radius >= left_paddle.getPosition().x
+            && ball.getPosition().y + ball_radius >= left_paddle.getPosition().y
+            && ball.getPosition().y - ball_radius
+                <= left_paddle.getPosition().y + left_paddle.getSize().y)
+        {
+            ball_velocity_x = -ball_velocity_x;
+        }
+
 ////////////CLOSE WINDOW
         while (const auto event = window.pollEvent())
         {
