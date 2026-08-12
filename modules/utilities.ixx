@@ -125,7 +125,7 @@ export void puh_puh(){
                 && ball.getPosition().x <= left_paddle.getPosition().x + left_paddle.getSize().x){
             ball_velocity_x = -ball_velocity_x;
         }
-*/        
+*/
 
         // Right paddle
         if (ball_velocity_x > 0.0f
@@ -150,7 +150,7 @@ export void puh_puh(){
         {
             ball_velocity_x = -ball_velocity_x;
         }
-
+        
 ////////////CLOSE WINDOW
         while (const auto event = window.pollEvent())
         {
